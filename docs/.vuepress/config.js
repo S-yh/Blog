@@ -2,7 +2,6 @@ module.exports = {
     title: '随笔一记',
     base: '/blog/',
     description: "石宇航的博客",
-    dest: public,
     head: [
         ['link', {rel: 'icon', href: './public/favicon.ico'}]
     ],
