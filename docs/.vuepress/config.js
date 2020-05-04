@@ -3,7 +3,7 @@ module.exports = {
     base: '/blog/',
     description: "石宇航的博客",
     head: [
-        ['link', {rel: 'icon', href: './public/favicon.ico'}]
+        ['link', {rel: 'icon', href: 'favicon.ico'}]
     ],
     themeConfig: {
         nav:[
