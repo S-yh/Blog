@@ -19,6 +19,7 @@ module.exports = {
             ['/node/', 'Node'],
             ['/git/', 'Git'],
             ['/webpack/', 'Webpack'],
+            ['/nginx/', 'Nginx'],
             ['/docker/', 'Docker'],
             ['/browser/', '浏览器'],
             ['/snippet/', '工具函数/代码片段'],
