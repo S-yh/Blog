@@ -31,7 +31,7 @@ Function.prototype.bind = function (context) {
         return self.apply(context, arguments);
     };
 };
-var obj = {name: '前端架构师'};
+var obj = {name: '前端'};
 var func = function () {
     console.log(this.name);
 }.bind(obj);
@@ -297,13 +297,191 @@ function createCuury(func, args) {
 概括来讲，就是这两个属性都会使 script 标签异步加载，然而执行的时机是不一样的。也就是说 async 是乱序的，而 defer 是顺序执行，这也就决定了async 比较适用于百度分析或者谷歌分析这类不依赖其他脚本的库。
 
 ## 实现简单的promise
+[参考](https://juejin.im/post/5b83cb5ae51d4538cc3ec354)
 
-* 定义三个状态
-	* const PENDING = 'pending'   
-	* const FULFILLED = 'fulfilled'
-	* const REJECTED = 'rejected'
-![promise](./promise1.png)
-![promise](./promise2.png)
+* `Promise`构造函数必须接受一个函数作为参数, 该函数包含`resolve`, `reject`两个参数  
+	* `resolve`将状态从`PENDING`变为`REJECTED`
+	* `reject`将状态从`PENDING`变为`REJECTED`
+* `Promise`对象存在三种状态, `进行中(PENDING)` `已成功(FULFILLED)` `已失败(REJECTED)` 且状态只能由`PENDING`变为`FULFILLED`或`REJECTED`, 改变之后不会再发生变化  
+* `Promise`的值是指状态改变时传递给回调函数的值 `resolve(param: any)` `param`就是`Promise`的值  
+* `Promise`的`then`方法, 接受两个参数`onResolved`, `onRejected`
+	* `onResolved`: 必须是函数,第一个参数为`resolve`函数传入的值,在promise状态改变前不可以被调用, 且只能调用一次
+	* `onRejected`: 必须是函数,第一个参数为`reject`函数传入的值,在promise状态改变前不可以被调用, 且只能调用一次
+	* `then`: 可以被多次调用,所有的`onResolved`在成功状态时依次被调用, 所有的`onRejected`在失败状态下依次被调用
+	* `then`: 方法返回一个新的promise对象,因此支持链式调用(`then`方法参数返回类型的不同会通过不同的手段执行)
+	
+
+
+```js
+const PENDING = 'PENGDING'
+const FULFILLED = 'FULFILLED'
+const REJECTED = 'REJECTED'
+
+class MyPromise {
+	constructor(fn) {
+		if (typeof fn !== 'function') {
+			throw new Error('MyPromise must accept a function as a parameter')
+		}
+		//添加Promise状态和值
+		this.status = PENDING
+		this.value = undefined
+		//添加成功失败回调函数队列
+		this.resolvedQueue = []
+		this.rejectedQueue = []
+
+		try {
+			fn(this.resolve.bind(this), this.reject.bind(this))
+		} catch (error) {
+			this.reject(error)
+		}
+	}
+	resolve(val) {
+		if (this.status !== PENDING) return
+		const run = () => {
+			//依次执行成功队列中的回调函数,并清空队列
+			const runResolved = (value) => {
+				let cb;
+				while (cb = this.resolvedQueue.shift()) {
+					cb(value)
+				}
+			}
+			//依次执行失败队列中的回调函数,并清空队列
+			const runRejected = (error) => {
+				let cb;
+				while (cb = this.rejectedQueue.shift()) {
+					cb(error)
+				}
+			}
+			//如果resolve的参数为Promise对象,则必须等到Promise状态改变后,
+			//当前Promise的状态才可以改变, 且状态取决于参数Promise对象的状态
+			if (val instanceof MyPromise) {
+				val.then(value => {
+					this.value = value
+					this.status = FULFILLED
+					runResolved(value)
+				}, err => {
+					this.value = err
+					this.status = REJECTED
+					runRejected(err)
+				})
+			} else {
+				this.value = val
+				this.status = FULFILLED
+				runResolved(val)
+			}
+		}
+		setTimeout(run, 0)
+	}
+	reject(err) {
+		if (this.status !== PENDING) return
+		const run = () => {
+			this.status = REJECTED
+			this.value = err
+			//依次执行失败队列中的回调函数,并清空队列
+			const runRejected = (error) => {
+				let cb;
+				while (cb = this.rejectedQueue.shift()) {
+					cb(error)
+				}
+			}
+			runRejected(err)
+		}
+		setTimeout(run, 0)
+	}
+	then(onResolved, onRejected) {
+		const {
+			value,
+			status
+		} = this
+		//返回一个新的Promise对象
+		return new MyPromise((onResolvedNext, onRejectedNext) => {
+			//封装一个成功时执行的函数
+			let resolved = value => {
+				try {
+					if (typeof onResolved !== 'function') {
+						onResolvedNext(value)
+					} else {
+						let res = onResolved(value)
+						if (res instanceof MyPromise) {
+							//如果当前回调函数返回MyPromise对象, 必须等待其状态改变后再执行下一个回调
+							res.then(onResolvedNext, onRejectedNext)
+						} else {
+							//否则会将返回结果直接作为参数, 传入下一个then的回调函数, 并立即执行下一个then的回调函数
+							onResolvedNext(res)
+						}
+					}
+				} catch (err) {
+					// 如果函数执行错误, 新的Promise对象的状态为失败
+					onRejectedNext(err)
+				}
+			}
+			let rejected = error => {
+				try {
+					if (typeof onRejected !== 'function') {
+						onRejectedNext(error)
+					} else {
+						let res = onRejected(error)
+						if (res instanceof MyPromise) {
+							res.then(onResolvedNext, onRejectedNext)
+						} else {
+							onResolvedNext(res)
+						}
+					}
+				} catch (err) {
+					onRejectedNext(error)
+				}
+			}
+			switch (status) {
+				case PENDING:
+					this.resolvedQueue.push(resolved)
+					this.rejectedQueue.push(rejected)
+					break
+				case FULFILLED:
+					resolved(value)
+					break
+				case REJECTED:
+					rejected(value)
+					break
+			}
+		})
+	}
+	catch (onRejected) {
+		return this.then(undefined, onRejected)
+	}
+
+	static resolve(value) {
+		//如果参数是Promise实例,直接返回这个实例
+		if (value instanceof MyPromise) return value
+		return new MyPromise(resolve => resolve(value))
+	}
+
+	static all(list) {
+		return new MyPromise((resolve, reject) => {
+			//返回值的集合
+			let values = []
+			let count = 0
+			for (let [i, p] of list.entries()) {
+				//数组参数如果不是MyPromise实例, 先调用MyPromise.resolve
+				this.resolve(p).then(res => {
+					values[i] = res
+					count++
+					//所有状态都变成fulfilles时返回的MyPromise状态就变成fulfilled
+					if(count === list.length) resolve(values)
+				}, err => {
+					reject(err)
+				})
+			}
+		})
+	}
+	finally (cb) {
+		return this.then(value => {
+			MyPromise.resolve(cb()).then(() => value)
+		}, err => {
+			MyPromise.resolve(cb()).then(() => {throw err})
+		})
+	}
+}
+```
 
 ## 执行上下文
 

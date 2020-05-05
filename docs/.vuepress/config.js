@@ -1,5 +1,5 @@
 module.exports = {
-    title: '随笔一记',
+    title: '随笔小记',
     base: '/blog/',
     description: "石宇航的博客",
     head: [
@@ -17,8 +17,8 @@ module.exports = {
             ['/vue/', 'Vue'],
             ['/react/', 'React'],
             ['/node/', 'Node'],
-            ['/git/', 'Git'],
             ['/webpack/', 'Webpack'],
+            ['/git/', 'Git'],
             ['/nginx/', 'Nginx'],
             ['/docker/', 'Docker'],
             ['/browser/', '浏览器'],
