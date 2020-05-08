@@ -120,7 +120,14 @@ https: 是在http上建立ssl加密层, 并对传输数据进行加密, 是http�
 		* cache-control must-revalidate, 如果页面过期, 则去服务器获取
 	* expires 显示的设置页面过期时间
 	* last-modified: 请求对象最后一次的修改时间, 用来判断缓存是否过期, 通常有文件的时间信息产生
-	* if-modified-since: 客户端发送请求附带的信息, 指浏览器缓存请求对象的最后修改日期, 用来和服务器端的last-modified做比较
+	* if-modified-since: 客户端发送请求附带的信息, 指浏览器缓存请求对象的最后修改日期, 用来和服务器端的last-modified做比较  
+
+缓存分为强缓存和协商缓存
+* 强缓存: 当浏览器发送Http请求时, 它检查之前曾经发送过这条请求, 而且响应结果带了Expires这个响应头并设置了一个绝对时间, 如果未超过这个时间, 浏览器就不会发送请求了. 而是直接取之前的返回结果, expires是http1.0时代的强缓存依据, http1.1补充了 Cache-Control这个响应头作为强缓存依据, Cache-Control的通常用法是cache-control:max-age=31600, 他表示资源有效时间, 是一个相对时间, cache-control的存在解决了当服务器时间和客户端时间不一致引发的问题. 我们发出的http资源的强缓存依然有效.  
+* 协商缓存: 
+	* Last-Modified, If-Modified-Since :一个请求响应时会返回一个响应头, Last-Modified表示这个资源上次修改的时间, 下次相同的资源请求会带上If-Modified-Since, 值和上次的last-modified相同, 服务端通过判断if-Modified-Since这个时间是否是当前资源的最后修改时间, 来决定是否使用缓存, 如果可以使用缓存就会以304状态码返回, 强依赖系统时间
+	* Etag, if-None-Match: 和上面的过程非常类似, 服务端第一次返回资源时会生成一个资源的摘要, 作为相应头Etag返回给客户端. 客户端请求时,通过if-none-match带上之前Etag的值,服务端来比较if-none-match和当前资源的摘要是否一致来判断是否命中缓存
+
 
 ## http协议头字段
 * http协议头字段. 

@@ -99,6 +99,7 @@ main        # 全局配置，对全局生效
 
 
 ## 配置反向代理
+[参考](https://www.jianshu.com/p/b010c9302cd0)
 ```shell
 server {
     listen 80;
@@ -108,6 +109,33 @@ server {
         proxy_pass http://s-yh.cn:9999;
     }
 }
+
+包含以下四种情况 (假设访问地址: http://192.168.1.1/proxy/test.html )
+
+第一种：
+location /proxy/ {
+  proxy_pass http://127.0.0.1/;
+}
+代理到URL：http://127.0.0.1/test.html
+
+第二种（相对于第一种，最后少一个 / ）
+location /proxy/ {
+  proxy_pass http://127.0.0.1;
+}
+代理到URL：http://127.0.0.1/proxy/test.html
+
+第三种：
+location /proxy/ {
+  proxy_pass http://127.0.0.1/aaa/;
+}
+代理到URL：http://127.0.0.1/aaa/test.html
+
+第四种（相对于第三种，最后少一个 / ）
+location /proxy/ {
+  proxy_pass http://127.0.0.1/aaa;
+}
+代理到URL：http://127.0.0.1/aaatest.html
+
 ```
 
 * 反向代理其他指令

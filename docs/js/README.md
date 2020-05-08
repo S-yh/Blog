@@ -22,6 +22,9 @@
 * 当JavaScript运行时错误（包括语法错误）发生时，window会触发一个ErrorEvent接口的error事件，并执行window.onerror()。
 * 当一项资源（如`<img>`或`<script>`）加载失败，加载资源的元素会触发一个Event接口的error事件，并执行该元素上的onerror()处理函数。这些error事件不会向上冒泡到window，不过（至少在Firefox中）能被单一的window.addEventListener捕获。
 
+## JS 单线程
+JavaScript作为一门浏览器的脚本语言, 主要的任务就是处理用户的交互, 用户的交互无非就是响应DOM的一些事件, 增删改DOM中的元素, JavaScript呗设计成单线程, 主要原因还是在于操作DOM, 
+
 
 ## 简易版 Function.prototype.bind
 ```js
@@ -265,23 +268,29 @@ function trim(str){
 ## 实现 add(1)(2)(3) = 6(柯里化)
 
 柯里化就是把接收多个参数的函数变换成接收一个单一参数的函数    
-```js
-const curry = (fn, ...args) => args.length < fn.length ? (...arguments) => curry(fn, ...args, ...arguments) : fn(...args)
-```
+
 柯里化是指一个函数, 接收函数A作为参数, 运行后能够返回一个新的函数,并且这个新的函数能够处理函数A的剩余参数
 ```js
-function createCuury(func, args) {
-    var arity = func.length
-    var args = args || 
-    return function() {
-        var _args = [].slice.call(arguments)
-        [].push.apply(_args, args)
-        if(_args.length < arity) {
-            return createCurry.call(this, func,_args)
-        }
-        return func.apply(this, _args)
-    }
-}   
+function createCurry(fn, ...curryArgs) {
+
+	return function () {
+		let args = [].slice.call(arguments)
+
+		if (curryArgs !== undefined) {
+			args = args.concat(curryArgs)
+		}
+
+		if (args.length < fn.length) {
+			return createCurry(fn, ...args)
+		}
+		return fn.apply(null, args)
+	}
+}  
+function add(a, b, c) {
+	return a + b + c
+}
+const _add = createCurry(add)
+_add(1)(2)(3) // 6
 ```
 
 ## script标签的defer和async
@@ -785,3 +794,16 @@ render();
 * commonjs是单个值导出, es6 可以导出多个
 * common是动态语法可以写在判断里, es6只能写在顶层
 * common的this是当前模块, es6 this是undefined
+
+## 自执行函数
+
+```js
+(function() {
+	statements
+})()
+```
+圆括号运算符`()`里的一个匿名函数, 这个匿名函数拥有独立的词法作用域, 再使用`()`创建了一个立即执行函数表达式
+
+## TS的优势
+* 增加类型检查, 有很多bug是可以通过类型安全来规避的
+* 提高生产力, 代码即文档

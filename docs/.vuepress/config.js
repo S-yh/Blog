@@ -23,7 +23,8 @@ module.exports = {
             ['/docker/', 'Docker'],
             ['/browser/', '浏览器'],
             ['/snippet/', '工具函数/代码片段'],
-            ['/algorithm/', '数据结构/算法']
+            ['/algorithm/', '数据结构/算法'],
+            ['/performance/', '性能优化']
         ],
         sidebarDepth: 1
     }

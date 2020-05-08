@@ -465,3 +465,7 @@ animation: myAnimation 5s infinite;
 	* 线类: baseline, top, middle, bottom
 	* 文本类: text-top, 
 	* 数值. 百分比, 百分比基于line-height计算
+
+## css预处理器机制
+
+css预处理器是为了简化css代码的编写,解决浏览器的兼容问题. 可以嵌套,使用变量,混入,继承,函数,逻辑控制等.
