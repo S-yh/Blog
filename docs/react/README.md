@@ -139,4 +139,5 @@ virtual dom 是一个轻量级的JavaScript对象, 他最初只是real DOM的副
 * 在IE, Edge中, 一个一个插入子孙节点, 效率高于插入一整个序列化的节点树
 * react通过lazyTree,在IE,Edge进行单个节点依次渲染节点, 而在其他浏览器则首先将整个大的DOM结构建好,整体插入容器
 
-
+## 为什么hook只能在顶层调用
+我们可以在组件中使用多个state Hook或 Effect Hook, 但是React如何知道state对应哪个useState? React是根据Hook的调用顺序来追踪state的. Hook在每次渲染中的调用顺序保持相同, React就能正确地将内部state和对应的Hook进行关联. 

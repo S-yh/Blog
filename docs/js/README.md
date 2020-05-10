@@ -23,7 +23,7 @@
 * 当一项资源（如`<img>`或`<script>`）加载失败，加载资源的元素会触发一个Event接口的error事件，并执行该元素上的onerror()处理函数。这些error事件不会向上冒泡到window，不过（至少在Firefox中）能被单一的window.addEventListener捕获。
 
 ## JS 单线程
-JavaScript作为一门浏览器的脚本语言, 主要的任务就是处理用户的交互, 用户的交互无非就是响应DOM的一些事件, 增删改DOM中的元素, JavaScript呗设计成单线程, 主要原因还是在于操作DOM, 
+JavaScript作为一门浏览器的脚本语言, 主要的任务就是处理用户的交互, 用户的交互无非就是响应DOM的一些事件, 增删改DOM中的元素, JavaScript被设计成单线程, 主要原因还是在于操作DOM, 
 
 
 ## 简易版 Function.prototype.bind
@@ -807,3 +807,4 @@ render();
 ## TS的优势
 * 增加类型检查, 有很多bug是可以通过类型安全来规避的
 * 提高生产力, 代码即文档
+

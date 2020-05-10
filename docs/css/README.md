@@ -5,7 +5,7 @@
     * 根元素 `html` `body`
     * 浮动元素 float 不为 none
     * 绝对定位元素 position 为 absolute, fixed
-    * 行内块元素 display 为 inlune-block
+    * 行内块元素 display 为 inline-block
     * 表格单元格, 表格标题 display 为 table-cell, table-caption
     * 匿名表格单元格元素（元素的 display 为 table、table-row、 table-row-group、table-header-group、table-footer-group（分别是HTML table、row、tbody、thead、tfoot的默认属性）或 inline-table）
     * overflow 不为 visible
@@ -301,7 +301,17 @@ CSS 选择符
 * 最适合带有大型渲染区域的应用程序（比如谷歌地图）
 * 复杂度高会减慢渲染速度（任何过度使用 DOM 的应用都不快）
 * 不适合游戏应用
-
+|Canvas|svg|
+|------|---|
+|通过JavaScript来绘制2D图形|是一种使用xml描述2D图形的语言|
+|是HTML5提供的新元素|历史久远,并不是html5专有的标签|
+|位图,放大或改变尺寸会失真, 逐像素进行渲染,依赖分辨率|矢量图,放大或改变尺寸不会失真,不依赖分辨率|
+|弱的文本渲染能力|最适合带有大型渲染区域的应用程序|
+|能够以png或jpg格式保存结果图像,能够引入.png和jpg格式图片|不能引入,也不能保存成png和jpg|
+|不支持事件处理器|支持事件处理器|
+|不能被引擎抓取|可以被引擎抓取|
+|--|复杂度高会减慢渲染速度|
+|最适合图像密集型游戏, 其中的许多对象会被频繁重绘|不适合游戏应用|
 
 ## 文字在超出长度时省略号代替
 超长长度的文字在省略显示后，如何在鼠标悬停时，以悬浮框的形式显示出全部信息
@@ -423,9 +433,6 @@ animation: myAnimation 5s infinite;
     to {top: 100px}
 }
 ```
-
-## Canvas和svg区别
-![canvas,svg](./canvas-svg.png)
 
 ## setTimeout,与animation,requestAnimationFrame区别
 * setTimeout基于浏览器的显示频率. 大概是16.7ms(1s渲染60次), 如果小于这个时间会丢帧, 

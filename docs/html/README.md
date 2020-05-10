@@ -135,7 +135,7 @@ repaint是某个DOM元素进行重绘, reflow是对整个文档页面进行重�
 
 * 为了实现双击缩放操作, 在单击300ms后, 如果未进行第二次点击, 则执行click单击操作, 也就是为了判断用户是否双击, 但是在app中无论是否需要双击缩放, click都会产生300ms延迟
 * 解决方案:
-  * 使用touchstart替换click: 将click替换成touchstart不仅解决了click事件延时问题. 还解决了穿透问题, 因为穿透问题是在touch和click混用时产生的
+  * 使用touchstart替换click: 将click替换成touchstart不仅解决了click事件延时问题. 还解决了穿透问题, 因为穿透问题是在touch和click混用时产生的  
 	* 使用fastclick库, 
 
 ## 移动端click点击穿透
