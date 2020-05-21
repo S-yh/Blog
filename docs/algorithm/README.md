@@ -55,3 +55,17 @@ var twoSum = function(nums, target) {
 //expect [0,1]
 console.log(twoSum([2,7,11,15],9))
 ```
+
+## 数组拆分
+数组arr = [a1,a2,a3,b1,b2,b3,c1,c2,c3] 转化为 [a1,b1,c1],[a2,b2,c2],[a3,b3,c3]
+```js
+function rangeArr(arr) {
+    let result = []
+    arr.forEach(item => {
+        let i = /\d+/.exec(item)[0]
+        result[i] ? result[i].push(item) : result[i] = [item]
+    })
+    return result.filter(Boolean)
+}
+```
+

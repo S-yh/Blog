@@ -110,20 +110,6 @@ repaint是某个DOM元素进行重绘, reflow是对整个文档页面进行重�
 * 表单控件 calendar, date, time, email, url, search
 * 新技术 webworker, websocket, Geolocation
 
-## cookies，sessionStorage和localStorage
-
-* cookie是网站为了标示用户身份而存储在用户本地终端上的数据
-* cookie数据始终在同源的http请求中携带, 在服务器和浏览器之间来回传递
-* sessionstorage和localstorage不会自动把数据发到服务器,仅在本地保存
-
-    存储大小
-* cookie大小不能超过4k
-* storage可以达到5M或更大
-
-    有效时间
-* localstorage持久有效
-* sessionstorage浏览器关闭之前有效
-* cookie在设定时间内有效
 
 ## [浏览器多标签页的通信](https://juejin.im/post/5acdba01f265da23826e5633)
 

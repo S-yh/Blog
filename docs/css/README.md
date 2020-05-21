@@ -476,3 +476,51 @@ animation: myAnimation 5s infinite;
 ## css预处理器机制
 
 css预处理器是为了简化css代码的编写,解决浏览器的兼容问题. 可以嵌套,使用变量,混入,继承,函数,逻辑控制等.
+
+## a标签样式
+顺序: `link --> visited --> hover --> active`
+
+## animation steps
+steps()功能符使动画不连续  
+语法: steps(number, position)
+* number: 表示把动画分成了多少段
+* position: 表示动画是从时间段的开头连续还是末尾连续, start, end(默认值)两个值,start先断在开始执行动画,end是先开始执行动画再断
+
+## 动画
+* css动画一般分为补间动画(关键帧动画)和逐帧动画, 
+	* 补间动画/关键帧动画: 常用于实现位移, 颜色(透明度), 大小, 旋转, 倾斜等变化, 一般有transition和animation keyframes两种方法实现
+		* transition: 用于实现简单的动画, 只有起始两帧过渡, 多用于页面的交互操作. 
+		> transition允许css的属性值在一定时间内平滑的过渡, 圆滑的以动画效果改变css的属性值
+		* keyframes animation: 用于实现较为复杂的动画, 一般关键帧较多
+		> 设置动画的关键帧规则, animation的timing-function设置为ease, linear或cubic-bezier, 会在每个关键帧之间插入补间动画,产生具有连贯性的动画
+	* 逐帧动画: timing-function使用steps过渡方式  
+
+transition优点是简单易用, 也有以下局限:
+1. 需要事件触发, 没法在网页加载时自动发生
+2. transition是一次性的, 不能重复发生,除非一再触发
+3. transition只能定义开始状态和结束状态, 不能定义中间状态, 只有两个状态
+  
+## 贝塞尔曲线
+* 一个标准的3次贝塞尔曲线需要 `4`个点, 起始点 终止点(也称锚点) 以及两个相互分离的中间点. 
+* (`SVG`)3次贝塞尔曲线指令: `M x0 y0 C x1 y1, x2 y2, x y`两个控制点`(x1,y1) (x2,y2)`, `(x,y)`代表曲线的终点. 字母`C`表示特定动作和行为, 大写,表示标准3次贝塞尔曲线. 字母`M`代表MoveTo,指将绘图的起点移动到此处. `M`后面一个点,`C`后面3个点. 构成贝塞尔曲线的4个点  
+
+|命令|名称|参数|
+|----|----|----|
+| M |moveto移动到|(x y)+|
+| H |horizontal lineto 水平线到|x+|
+| L |lineto画线到|(x y)+|
+| Z |closepath关闭路径|(none)|
+| V |vertical lineto 垂直线到|y+|
+| C |curveto三次贝塞尔曲线到|(x1 y1 x2 y2 x y)+|
+| S |smooth curveto 光滑三次贝塞尔曲线到|(x2 y2 x y)+|
+| T |smooth quadratic Bézier curveto 光滑二次贝塞尔曲线到|(x y)+|
+| Q |quadratic Bézier curveto 二次贝塞尔曲线到|(x1 y1 x y)+|
+| A |elliptical arc椭圆弧|(rx ry x-axis-rotation large-arc-flag sweep-flag x y)+|
+| R |Catmull-Rom curveto*  Catmull-Rom曲线|x1 y1 (x y)+|
+
+* `CSS3`: `cubic-bezier(x1,y1,x2,y2)`, 其中`x1,y1`这个对应起点连接的锚点, `x2,y2`对应终点连接的控制点, 起点,终点分别为`(0,0)和(1,1)`
+* `canvas`:`moveTo`移动到起点, `bezierCurveTo(x1,y1,x2,y2,x,y)`方法接受6个值,三个点, 前两个控制点, 最后一组终点
+
+## CSS流体特性和BFC多栏自适应布局
+* 流体特性: 块状水平元素, 如div元素, 在默认情况下(非浮动,绝对定位), 水平方向会自动填满外部的容器,如果有margin,padding,border-width等, 实际内容和区域会相应变窄
+* 多栏自适应: float + BFC(`overflow:hidden`,`display:inline-block/table-cell`), 栏间距: float元素, margin

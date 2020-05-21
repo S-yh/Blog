@@ -157,10 +157,11 @@ Vue不能检测到数组的变动, 可使用Vue.$set(array, indexOfArray, newVal
 |destoryed| 组件销毁后调用
 
 ## Vue-Router
+::: tip
+vue-router: 这里的理由就是SPA的路径管理器, 路由模块的本质就是建立起url和页面之间的映射关系, SPA的核心之一就是-->更新视图
+:::
 * hash模式:location.hash 单页应用. 每次hash值的变化, 触发hashchange事件, 通过这个事件可以知道hash值发生了哪些变化, 监听来实现页面的操作
-* history模式: 通过 pushState, replaceState可以改变url地址且不发送请求, 同时还有popstate, 通过监听事件实现路由, 但是因为没有#号, 所以当用户刷新页面时,浏览器还是会发送请求,
-
-为了避免这些情况. 需要服务器的支持, 把所有路由重定向到根页面
+* history模式: 通过 pushState, replaceState可以改变url地址且不发送请求, 同时还有popstate, 通过监听事件实现路由, 但是因为没有#号, 所以当用户刷新页面时,浏览器还是会发送请求,为了避免这些情况. 需要服务器的支持, 把所有路由重定向到根页面
 * Vue.use执行install 方法安装vue-router插件
 * 混入 beforeCreate, destroyed
 * 注册全局组件 RouterView, RouterLink
@@ -357,3 +358,11 @@ directives: {
 	* oldVnode: 上一个虚拟节点
 
 
+## Vue SSR
+> 优势
+* 更好的SEO, 由于搜索引擎爬虫抓取工具可以直接查看完全渲染的页面
+* 更快的内容到达时间,更好的用户体验.  
+> 限制
+* 开发条件限制: 只能使用某些生命周期钩子函数.
+* 服务器渲染应用程序,需要处于nodejs运行环境
+* 更多的服务器端负载. 
