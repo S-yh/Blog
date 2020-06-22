@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Event Loop | 随笔小记</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" href="favicon.ico">
+    <meta name="description" content="石宇航的博客">
+    <link rel="preload" href="/blog/assets/css/0.styles.42abb846.css" as="style"><link rel="preload" href="/blog/assets/js/app.6bc65339.js" as="script"><link rel="preload" href="/blog/assets/js/2.56432c1b.js" as="script"><link rel="preload" href="/blog/assets/js/13.0c1b465d.js" as="script"><link rel="prefetch" href="/blog/assets/js/10.b404adfe.js"><link rel="prefetch" href="/blog/assets/js/11.67ecfe53.js"><link rel="prefetch" href="/blog/assets/js/12.cf8d8beb.js"><link rel="prefetch" href="/blog/assets/js/14.18ec28dd.js"><link rel="prefetch" href="/blog/assets/js/15.eb0f3e64.js"><link rel="prefetch" href="/blog/assets/js/16.b8a3e666.js"><link rel="prefetch" href="/blog/assets/js/17.b7b03a4d.js"><link rel="prefetch" href="/blog/assets/js/18.09d0436c.js"><link rel="prefetch" href="/blog/assets/js/19.015944e6.js"><link rel="prefetch" href="/blog/assets/js/20.a2526c8c.js"><link rel="prefetch" href="/blog/assets/js/21.fc97d024.js"><link rel="prefetch" href="/blog/assets/js/22.a3e1ba11.js"><link rel="prefetch" href="/blog/assets/js/23.af659f66.js"><link rel="prefetch" href="/blog/assets/js/24.a9a5535e.js"><link rel="prefetch" href="/blog/assets/js/25.a58c0fc0.js"><link rel="prefetch" href="/blog/assets/js/26.bd130450.js"><link rel="prefetch" href="/blog/assets/js/27.c64a8768.js"><link rel="prefetch" href="/blog/assets/js/28.e2faf7b4.js"><link rel="prefetch" href="/blog/assets/js/29.35a166a5.js"><link rel="prefetch" href="/blog/assets/js/3.c51900ee.js"><link rel="prefetch" href="/blog/assets/js/30.45faf144.js"><link rel="prefetch" href="/blog/assets/js/4.8059e4f4.js"><link rel="prefetch" href="/blog/assets/js/5.01321ecb.js"><link rel="prefetch" href="/blog/assets/js/6.e14d6673.js"><link rel="prefetch" href="/blog/assets/js/7.6b71f53f.js"><link rel="prefetch" href="/blog/assets/js/8.62d60ed2.js"><link rel="prefetch" href="/blog/assets/js/9.287114f8.js">
+    <link rel="stylesheet" href="/blog/assets/css/0.styles.42abb846.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/blog/" class="home-link router-link-active"><!----> <span class="site-name">随笔小记</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/blog/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/blog/note/" class="nav-link">
+  Note
+</a></div><div class="nav-item"><a href="/blog/article/" class="nav-link router-link-active">
+  Article
+</a></div><div class="nav-item"><a href="https://github.com/S-yh/blog" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/blog/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/blog/note/" class="nav-link">
+  Note
+</a></div><div class="nav-item"><a href="/blog/article/" class="nav-link router-link-active">
+  Article
+</a></div><div class="nav-item"><a href="https://github.com/S-yh/blog" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav>  <ul class="sidebar-links"><li><a href="/blog/article/vue-ssr.html" class="sidebar-link">Vue SSR</a></li><li><a href="/blog/article/redux.html" class="sidebar-link">Redux</a></li><li><a href="/blog/article/vuex.html" class="sidebar-link">Vuex</a></li><li><a href="/blog/article/react-hook.html" class="sidebar-link">React Hooks</a></li><li><a href="/blog/article/vue-composition-api.html" class="sidebar-link">Vue Composition API</a></li><li><a href="/blog/article/event-loop.html" class="active sidebar-link">Event Loop</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="javascript-事件循环"><a href="#javascript-事件循环" class="header-anchor">#</a> JavaScript 事件循环</h1> <div class="custom-block tip"><p class="custom-block-title">TIP</p> <p>事件循环从整体上决定了JavaScript代码的执行顺序</p></div> <p>JavaScript的特点就是单线程, 这个唯一的线程拥有唯一的一个<strong>事件循环</strong>. JavaScript代码的执行过程中, 除了依靠<strong>函数调用栈</strong>来处理函数的执行顺序, 还依靠<strong>任务队列</strong>来处理一些代码的执行. <strong>任务队列</strong>分为<code>macro-task(宏任务)</code>和<code>micro-task(微任务)</code>. 新标准中称为<code>task</code>和<code>jobs</code></p> <ul><li>宏任务大概包括: <code>script(整体代码)</code>, <code>setTimeout</code>, <code>setInterval</code>,<code>I/O</code>, <code>UI rendering</code></li> <li>微任务大概包括: <code>Promise</code>, <code>MutationObserver</code></li></ul> <p><code>setTimeout</code>和<code>Promise</code>等称之为任务源.进入任务队列的是他们指定的具体执行任务.来自不通过任务源的任务会进入不同的任务队列. setTimeout和setInterval是同源的.</p> <blockquote><p>setTimeout中的回调函数是进入任务队列的任务</p></blockquote> <p><strong>事件循环的顺序决定代码的执行顺序, 从script整体代码开始循环执行, 此时全局上下文进入函数调用栈, 之后不断的有同步函数进入调用栈,又不断清除, 直到调用栈清空只剩全局上下文, 接下来开始执行micro-task队列中的所有微任务. 直到所有可执行的微任务执行完毕之后. 循环再次从宏任务开始. 在marco-task队列中找到其中一个宏任务执行完毕. 并执行所有其产生的微任务. 如此循环反复执行下去.</strong></p> <blockquote><p>其中每一个任务的执行, 无论是marco-task 还是 micro-task 都是借助函数调用栈来完成的.</p></blockquote> <blockquote><p>其中遇到<code>setTimeout</code>定时任务时. 会将其加入宏任务中的定时器队列, 当其出队的时候. 如果没到时间则将其加入到下一个事件循环中, 直到到达指定时间. 才会将其出队.</p></blockquote></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/blog/article/vue-composition-api.html" class="prev">
+        Vue Composition API
+      </a></span> <!----></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/blog/assets/js/app.6bc65339.js" defer></script><script src="/blog/assets/js/2.56432c1b.js" defer></script><script src="/blog/assets/js/13.0c1b465d.js" defer></script>
+  </body>
+</html>
