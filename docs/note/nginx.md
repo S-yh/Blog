@@ -394,3 +394,13 @@ server {
     }
 }
 ```
+
+## Nginx发布程序浏览器缓存html文件
+``` shell
+location ~ .*\.(htm|html)?$ {
+  # 增加缓存
+  add_header Cache-Control "private, no-store, no-cache, must-revalidate, proxy-revalidate";
+  access_log on;
+}
+```
+通过以上配置.可以保证`html页面不被缓存, 在每次发布新版本的时候,保证用户加载最新版本页面.`

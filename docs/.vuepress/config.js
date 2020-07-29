@@ -1,3 +1,10 @@
+/*
+ * @Description: 基础配置
+ * @Author: Syh
+ * @Date: 2020-05-03 12:22:05
+ * @LastEditTime: 2020-07-05 11:52:59
+ * @LastEditors: Syh
+ */ 
 module.exports = {
     title: '随笔小记',
     base: '/blog/',
@@ -51,7 +58,8 @@ module.exports = {
                 'vuex',
                 'react-hook',
                 'vue-composition-api',
-                'event-loop'
+                'event-loop',
+                'typescript'
             ],
         },
         sidebarDepth: 1
