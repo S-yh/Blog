@@ -164,3 +164,28 @@ var func = function () {
 }.bind(obj);
 func();
 ```
+## 深拷贝
+```js
+function type(value) {
+  return Object.prototype.toString.call(value).split(" ")[1].slice(0, -1).replace(/^[A-Z]{1}/, p => p.toLowerCase())
+}
+function deepClone(target){
+  let res = null
+
+  if(type(target) === 'array') {
+    res = []
+    target.forEach(item => {
+      res.push(deepClone(item))
+    })
+  }
+  
+  if(type(target) === 'object'){
+    res = {}
+    Object.keys(target).forEach(key => {
+      res[key] = deepClone(target[key])
+    })
+  }
+
+  return res || target
+}
+```

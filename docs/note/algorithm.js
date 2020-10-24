@@ -21,3 +21,7 @@ var numSquares = function(n) {
 };
 
 console.log(numSquares(12));
+
+
+
+
