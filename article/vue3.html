@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Vuex | 随笔小记</title>
+    <meta name="generator" content="VuePress 1.7.1">
+    <link rel="icon" href="favicon.ico">
+    <meta name="description" content="石宇航的博客">
+    
+    <link rel="preload" href="/blog/assets/css/0.styles.b2229841.css" as="style"><link rel="preload" href="/blog/assets/js/app.b3969549.js" as="script"><link rel="preload" href="/blog/assets/js/2.03b91b0c.js" as="script"><link rel="preload" href="/blog/assets/js/23.0284509d.js" as="script"><link rel="prefetch" href="/blog/assets/js/10.c7372d93.js"><link rel="prefetch" href="/blog/assets/js/11.29433f11.js"><link rel="prefetch" href="/blog/assets/js/12.eef3a008.js"><link rel="prefetch" href="/blog/assets/js/13.14a9cbc3.js"><link rel="prefetch" href="/blog/assets/js/14.93409171.js"><link rel="prefetch" href="/blog/assets/js/15.074ce28b.js"><link rel="prefetch" href="/blog/assets/js/16.d6ea477a.js"><link rel="prefetch" href="/blog/assets/js/17.2aabea44.js"><link rel="prefetch" href="/blog/assets/js/18.e8ed62c7.js"><link rel="prefetch" href="/blog/assets/js/19.828c4cbb.js"><link rel="prefetch" href="/blog/assets/js/20.aeae618d.js"><link rel="prefetch" href="/blog/assets/js/21.e1db9825.js"><link rel="prefetch" href="/blog/assets/js/22.6fd7192e.js"><link rel="prefetch" href="/blog/assets/js/24.496edd0d.js"><link rel="prefetch" href="/blog/assets/js/25.31059888.js"><link rel="prefetch" href="/blog/assets/js/26.3babb49c.js"><link rel="prefetch" href="/blog/assets/js/27.752e82c1.js"><link rel="prefetch" href="/blog/assets/js/28.c3251fea.js"><link rel="prefetch" href="/blog/assets/js/29.6ab7e8bd.js"><link rel="prefetch" href="/blog/assets/js/3.2a3bc397.js"><link rel="prefetch" href="/blog/assets/js/30.e06fe430.js"><link rel="prefetch" href="/blog/assets/js/31.77de20f0.js"><link rel="prefetch" href="/blog/assets/js/32.9aff7892.js"><link rel="prefetch" href="/blog/assets/js/33.324c57e9.js"><link rel="prefetch" href="/blog/assets/js/34.54e5f43b.js"><link rel="prefetch" href="/blog/assets/js/35.b80cf3d2.js"><link rel="prefetch" href="/blog/assets/js/36.08a4906c.js"><link rel="prefetch" href="/blog/assets/js/4.bdd00efc.js"><link rel="prefetch" href="/blog/assets/js/5.cac11e48.js"><link rel="prefetch" href="/blog/assets/js/6.b2af4ce7.js"><link rel="prefetch" href="/blog/assets/js/7.559262d1.js"><link rel="prefetch" href="/blog/assets/js/8.99e1b260.js"><link rel="prefetch" href="/blog/assets/js/9.f0d3f1f7.js">
+    <link rel="stylesheet" href="/blog/assets/css/0.styles.b2229841.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/blog/" class="home-link router-link-active"><!----> <span class="site-name">随笔小记</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/blog/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/blog/note/" class="nav-link">
+  Note
+</a></div><div class="nav-item"><a href="/blog/article/" class="nav-link router-link-active">
+  Article
+</a></div><div class="nav-item"><a href="https://github.com/S-yh/blog" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/blog/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/blog/note/" class="nav-link">
+  Note
+</a></div><div class="nav-item"><a href="/blog/article/" class="nav-link router-link-active">
+  Article
+</a></div><div class="nav-item"><a href="https://github.com/S-yh/blog" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><a href="/blog/article/vue-ssr.html" class="sidebar-link">Vue SSR</a></li><li><a href="/blog/article/redux.html" class="sidebar-link">Redux</a></li><li><a href="/blog/article/vuex.html" class="sidebar-link">Vuex</a></li><li><a href="/blog/article/react-hook.html" class="sidebar-link">React Hooks</a></li><li><a href="/blog/article/vue-composition-api.html" class="sidebar-link">Vue Composition API</a></li><li><a href="/blog/article/event-loop.html" class="sidebar-link">Event Loop</a></li><li><a href="/blog/article/typescript.html" class="sidebar-link">TypeScript</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="vue-js-3-0"><a href="#vue-js-3-0" class="header-anchor">#</a> Vue.js 3.0</h1> <h2 id="新增特性及优化"><a href="#新增特性及优化" class="header-anchor">#</a> 新增特性及优化</h2> <ul><li>代码管理: 通过monorepo管理</li> <li>类型检查: 通过TypeScript重构代码</li> <li>性能优化:
+<ul><li>移除一些features</li> <li>引入tree-shaking: 只打包引入的模块. 减少vue.js打包体积</li></ul></li> <li>数据劫持优化: 通过Proxy API劫持
+<ul><li>proxy不能监听到内部深层次的对象变化, vue3是在getter中取递归响应式</li></ul></li> <li>编译优化:
+<ul><li>patch过程优化: 相比于vue2的基于组件的变化, vue3 利用block tree 将模板基于动态节点.借助block tree 将vnode更新性能由模板整体大小提升为与动态内容的数量相关</li> <li>slot的编译优化</li> <li>事件监听器的缓存优化</li> <li>重写diff算法</li></ul></li> <li>语法优化:
+<ul><li>composition API, 优化逻辑复用,更好的类型支持</li></ul></li></ul> <h2 id="组件渲染"><a href="#组件渲染" class="header-anchor">#</a> 组件渲染</h2> <ul><li>创建vnode -&gt; 渲染vnode -&gt; 生成dom</li></ul> <h3 id="应用程序初始化"><a href="#应用程序初始化" class="header-anchor">#</a> 应用程序初始化</h3> <div class="language-js extra-class"><pre class="language-js"><code>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>createApp<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vue'</span>
+<span class="token keyword">import</span> App <span class="token keyword">from</span> <span class="token string">'./app'</span>
+
+<span class="token keyword">const</span> app <span class="token operator">=</span> <span class="token function">createApp</span><span class="token punctuation">(</span>App<span class="token punctuation">)</span>
+app<span class="token punctuation">.</span><span class="token function">mount</span><span class="token punctuation">(</span><span class="token string">'#app'</span><span class="token punctuation">)</span>
+
+</code></pre></div><h3 id="核心渲染流程"><a href="#核心渲染流程" class="header-anchor">#</a> 核心渲染流程</h3> <ul><li>创建vnode和渲染vnode
+<ul><li>vnode: 本质上是用来描述DOM 的JavaScript对象, 他在Vue.js中可以描述不同类型的节点, 比如普通元素节点, 组件节点等</li> <li>优势:
+<ol><li>抽象: 可以把渲染过程抽象化,从而使得组件的抽象能力也得到提升</li> <li>跨平台: 因为patch vnode的过程不同平台可以有自己的实现. 基于vnode再做服务端渲染. weex平台, 小程序平台渲染</li></ol></li> <li>初始渲染两件事情:
+<ol><li>渲染组件生成subTree</li> <li>把subTree挂载到container中</li></ol></li></ul></li></ul></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/blog/assets/js/app.b3969549.js" defer></script><script src="/blog/assets/js/2.03b91b0c.js" defer></script><script src="/blog/assets/js/23.0284509d.js" defer></script>
+  </body>
+</html>
