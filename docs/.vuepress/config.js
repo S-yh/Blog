@@ -6,7 +6,7 @@
  * @LastEditors: Syh
  */ 
 module.exports = {
-    title: '随笔小记',
+    title: '小记',
     base: '/blog/',
     description: "石宇航的博客",
     head: [
