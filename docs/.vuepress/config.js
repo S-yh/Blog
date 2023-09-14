@@ -48,6 +48,7 @@ module.exports = {
                 'linux',
                 'docker',
                 'browser',
+                'network',
                 'snippet',
                 'algorithm',
                 'performance'

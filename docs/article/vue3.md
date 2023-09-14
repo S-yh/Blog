@@ -5,6 +5,17 @@ sidebarDepth: 0
 
 # Vue.js 3.0
 
+## vue3与vue2的主要区别
+
+* 使用层面: 
+    * 支持多个根标签, 不限于只能一个根元素
+    * 可以使用多个`v-model`, `v-model`代替以前的 `.sync`
+    * 借鉴`react hook`设计组合式api, 编程方式更自由,逻辑更便于复用
+    * setup代替了beforeCreate, created
+* 原理层面:
+    * 响应式数据的实现通过`proxy`代替`defineProperty` *proxy针对整个对象, defineProperty主要劫持对象的属性*
+    * 通过tree shaking优化打包体积.
+
 ## 新增特性及优化
 
 * 代码管理: 通过monorepo管理
